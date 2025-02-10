@@ -1,34 +1,34 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { CreateBooksDto, UpdateBooksDto } from './books.dto';
+import { CreateBookDto } from './dto/create-book.dto';
+import { UpdateBookDto } from './dto/update-book.dto';
 
-@Controller()
+@Controller('books')
 export class BooksController {
-  constructor(private readonly booksService: BooksService) { }
+  constructor(private readonly booksService: BooksService) {}
 
-  @MessagePattern('books.create')
-  create(@Payload() createBookDto: CreateBooksDto) {
+  @Post()
+  create(@Body() createBookDto: CreateBookDto) {
     return this.booksService.create(createBookDto);
   }
 
-  @MessagePattern('findAll')
+  @Get()
   findAll() {
     return this.booksService.findAll();
   }
 
-  @MessagePattern('findOne')
-  findOne(@Payload() id: number) {
-    return this.booksService.findOne(id);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.booksService.findOne(+id);
   }
 
-  @MessagePattern('update')
-  update(@Payload() updateBookDto: UpdateBooksDto) {
-    return this.booksService.update(updateBookDto.id, updateBookDto);
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
+    return this.booksService.update(+id, updateBookDto);
   }
 
-  @MessagePattern('delete')
-  remove(@Payload() id: number) {
-    return this.booksService.remove(id);
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.booksService.remove(+id);
   }
 }
