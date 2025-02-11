@@ -1,34 +1,37 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { BooksService } from './books.service';
-import { CreateBookDto, UpdateBookDto } from './book.dto';
+import { CreateBookDto, UpdateBookDto } from '@app/contracts/books/book.dto';
+import { BOOKS_PATTERN } from '@app/contracts/books/books.pattern';
 
 
 @Controller()
 export class BooksController {
-  constructor(private readonly booksService: BooksService) { }
+  constructor(private readonly booksService: BooksService) {
+    console.log('BooksController From The App');
+  }
 
-  @MessagePattern('books.create')
+  @MessagePattern(BOOKS_PATTERN.CREATE)
   create(@Payload() createBookDto: CreateBookDto) {
     return this.booksService.create(createBookDto);
   }
 
-  @MessagePattern('books.findAll')
-  findAll() {
-    return this.booksService.findAll();
+  @MessagePattern(BOOKS_PATTERN.FINDALL)
+  async findAll() {
+    return await this.booksService.findAll();
   }
 
-  @MessagePattern('books.findOne')
+  @MessagePattern(BOOKS_PATTERN.FINDONE)
   findOne(@Payload() id: number) {
     return this.booksService.findOne(id);
   }
 
-  @MessagePattern('books.update')
+  @MessagePattern(BOOKS_PATTERN.UPDATE)
   update(@Payload() updateBookDto: UpdateBookDto) {
     return this.booksService.update(updateBookDto.id, updateBookDto);
   }
 
-  @MessagePattern('books.remove')
+  @MessagePattern(BOOKS_PATTERN.REMOVE)
   remove(@Payload() id: number) {
     return this.booksService.remove(id);
   }

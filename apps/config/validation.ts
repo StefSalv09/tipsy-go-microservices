@@ -38,6 +38,12 @@ export class EnvVariablesDto {
   @IsString()
   FORGET_PASSWORD_TOKEN_EXPIRATION: string;
 
+  @IsNotEmpty()
+  BOOKS_PORT: number
+
+  @IsNotEmpty()
+  @IsString()
+  HOST: string;
 
   @IsNotEmpty()
   @IsString()

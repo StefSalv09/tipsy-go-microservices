@@ -21,6 +21,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 })
 export class UsersModule {
   constructor() {
-    console.log('UserModuleCalled-->API GATEWAY :>> ');
+    console.log('UserModule From the Gateway');
   }
 }

@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { BooksAppModule } from './books-app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { ENV } from 'apps/config';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -8,7 +9,8 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        port: 3002
+        port: ENV.BOOKS_PORT,
+        // host: ENV.HOST
       }
     }
   );

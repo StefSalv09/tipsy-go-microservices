@@ -1,11 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { CreateBookDto } from './dto/create-book.dto';
-import { UpdateBookDto } from './dto/update-book.dto';
-
+import { CreateBookDto, UpdateBookDto } from 'apps/books/src/books/book.dto';
 @Controller('books')
 export class BooksController {
-  constructor(private readonly booksService: BooksService) {}
+  constructor(private readonly booksService: BooksService) {
+    console.log('BooksController From The Gateway');
+  }
 
   @Post()
   create(@Body() createBookDto: CreateBookDto) {
@@ -14,6 +14,7 @@ export class BooksController {
 
   @Get()
   findAll() {
+    console.log('in the gateway findAll Called :>> ');
     return this.booksService.findAll();
   }
 

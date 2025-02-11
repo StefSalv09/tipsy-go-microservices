@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BooksController } from './books.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ENV } from 'apps/config';
 
 @Module({
   imports: [
@@ -10,8 +11,8 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         name: 'BOOKS_CLIENT',
         transport: Transport.TCP,
         options: {
-          port: 3002,
-          host: '0.0.0.0',
+          port: ENV.BOOKS_PORT,
+          // host: ENV.HOST
         }
       }
     ])
@@ -20,4 +21,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   providers: [BooksService],
 })
 export class BooksModule {
+  constructor() {
+    console.log('BooksModule From the Gateway');
+  }
 }

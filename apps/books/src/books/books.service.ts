@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBookDto, UpdateBookDto } from './book.dto';
+import { } from './book.dto';
+import { CreateBookDto, UpdateBookDto } from '@app/contracts/books/book.dto';
 
 @Injectable()
 export class BooksService {
-  private books: UpdateBookDto[] = [
+  private books: CreateBookDto[] = [
     {
       id: 1,
       title: 'The Great Gatsby',
@@ -61,8 +62,9 @@ export class BooksService {
     return newBook;
   }
 
-  findAll() {
-    return this.books;
+  async findAll() {
+    console.log('this.books :>> ', this.books);
+    return await this.books;
   }
 
   findOne(id: number) {
@@ -70,7 +72,7 @@ export class BooksService {
   }
 
   update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+
   }
 
   remove(id: number) {
