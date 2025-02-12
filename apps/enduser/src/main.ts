@@ -9,8 +9,8 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        port: ENV.END_USER_PORT,
-        host: '0.0.0.0',
+        port: 3001,
+        // host: '0.0.0.0',
       }
     }
   );
