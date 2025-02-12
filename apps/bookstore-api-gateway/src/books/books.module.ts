@@ -11,7 +11,7 @@ import { ENV } from 'apps/config';
         name: 'BOOKS_CLIENT',
         transport: Transport.TCP,
         options: {
-          port: ENV.BOOKS_PORT,
+          port: 6001,
           // host: ENV.HOST
         }
       }

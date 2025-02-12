@@ -9,7 +9,7 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        port: ENV.BOOKS_PORT,
+        port: 6001,
         // host: ENV.HOST
       }
     }
